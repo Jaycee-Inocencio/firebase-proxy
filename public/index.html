@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Firebase Proxy</title>
+</head>
+<body>
+  <h2>Send Data to Firebase via Proxy</h2>
+  <form id="postForm">
+    <label for="key">Key:</label>
+    <input type="text" id="key" name="key" required>
+    <label for="value">Value:</label>
+    <input type="text" id="value" name="value" required>
+    <button type="submit">Send</button>
+  </form>
+
+  <h3>Firebase Data:</h3>
+  <button onclick="fetchData()">Load Data</button>
+  <pre id="output"></pre>
+
+  <script>
+    document.getElementById('postForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const key = document.getElementById('key').value;
+      const value = document.getElementById('value').value;
+      const res = await fetch('/proxy', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ [key]: value })
+      });
+      const data = await res.json();
+      alert('Data sent: ' + JSON.stringify(data));
+    });
+
+    async function fetchData() {
+      const res = await fetch('/proxy');
+      const data = await res.json();
+      document.getElementById('output').innerText = JSON.stringify(data, null, 2);
+    }
+  </script>
+</body>
+</html>

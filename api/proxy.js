@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default async function handler(req, res) {
-  const FIREBASE_URL = 'https://occupancycounter-default-rtdb.asia-southeast1.firebasedatabase.app/'; // Replace this
+  const FIREBASE_URL = 'https://occupancycounter-default-rtdb.asia-southeast1.firebasedatabase.app/data.json'; // Replace this
   const AUTH = 'j7NXiBNDRv8pI0HqUPFxfttzmdwYuwNwsLM0ypeX'; // Optional: ?auth=YOUR_SECRET
 
   if (req.method === 'POST') {

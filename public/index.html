@@ -20,22 +20,27 @@
   <script>
     document.getElementById('postForm').addEventListener('submit', async (e) => {
       e.preventDefault();
+
       const key = document.getElementById('key').value;
       const value = document.getElementById('value').value;
-      const res = fetch('/api/proxy', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ [key]: value })
+
+      const res = await fetch('/api/proxy', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          [key]: value,
+          time: Date.now()
+        })
       });
 
-      // const data = await res.json();
-      alert('Data sent: ' + JSON.stringify(res));
+      const data = await res.json();
+      alert('✅ Data sent. Firebase ID: ' + data.id);
     });
 
     async function fetchData() {
-      const res = fetch('/api/proxy');
-      // const data = await res.json();
-      document.getElementById('output').innerText = JSON.stringify(res, null, 2);
+      const res = await fetch('/api/proxy');
+      const data = await res.json();
+      document.getElementById('output').innerText = JSON.stringify(data, null, 2);
     }
   </script>
 </body>

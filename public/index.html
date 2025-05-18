@@ -22,19 +22,20 @@
       e.preventDefault();
       const key = document.getElementById('key').value;
       const value = document.getElementById('value').value;
-      const res = await fetch('/proxy', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ [key]: value })
+      const res = fetch('/api/proxy', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ [key]: value })
       });
-      const data = await res.json();
-      alert('Data sent: ' + JSON.stringify(data));
+
+      // const data = await res.json();
+      alert('Data sent: ' + JSON.stringify(res));
     });
 
     async function fetchData() {
-      const res = await fetch('/proxy');
-      const data = await res.json();
-      document.getElementById('output').innerText = JSON.stringify(data, null, 2);
+      const res = fetch('/api/proxy');
+      // const data = await res.json();
+      document.getElementById('output').innerText = JSON.stringify(res, null, 2);
     }
   </script>
 </body>
